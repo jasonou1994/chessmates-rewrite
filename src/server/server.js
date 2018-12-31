@@ -1,85 +1,39 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const mongoose = require('mongoose');
+// const Sequelize = require('sequelize');
+// const sequelize = new Sequelize('postgres://twssmlqn:jlPGPWeVGUUGFGvH2bZWl_cC45Y5yroo@pellefant.db.elephantsql.com:5432/twssmlqn');
 
 const app = express();
-const path = require('path');
-const utilRouter = express.Router();
-
-app.use(bodyParser());
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('dist'));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-
-app.listen(80, "0.0.0.0", () => {
-    console.log('Express server on 80, 0.0.0.0');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
-mongoose.connect('mongodb://jason:jasonou1@ds145093.mlab.com:45093/jasonandfriends');
-mongoose.connection.once('open', () => {
-    console.log('Connected to jasonandfriends MLabs MongoDB');
+const playerRouter = express.Router();
+const connectionRouter = express.Router();
+
+const playerController = require('./controllers/players/playerController');
+const connectionController = require('./controllers/connections/connectionController.js');
+
+app.get('/', (req, res, next) => {
+  res.header(200);
+  res.sendFile(path.join(__dirname,'../../dist','index.html'))
 });
 
-const imageController = require('./images/imageController');
-const cookieController = require('./cookies/cookieController');
-const cartController = require('./cart/cartController')
-const squareController = require('./payment/squareController');
+////Player Routes//////
+app.use('/players', playerRouter);
+playerRouter.post('/', playerController.createPlayer)
 
+//Connection Routes
+app.use('/connections', connectionRouter);
+connectionRouter.get('/', connectionController.establishSSE);
 
-//CLIENT ROUTES
-app.get('/', cookieController.setCookie, (req, res, next) => {
-    res.header(200);
-    res.sendFile(path.join(__dirname,'../../dist','index.html'))
+const server = app.listen(80, function () {
+  console.log('Example app listening at http://%s:%s',
+    server.address().address, server.address().port);
 });
-
-app.get('/bundle.js', (req, res, next) => {
-    res.header(200);
-    res.sendFile(path.join(__dirname,'../../dist','bundle.js'));
-});
-
-app.get('/styles.css', (req, res, next) => {
-    res.header(200);
-    res.sendFile(path.join(__dirname,'../../dist','styles.css'));
-});
-
-app.get('/assets/thumbnails/:assetPath', (req, res, next) => {
-    res.header(200);
-    res.sendFile(path.join(__dirname,'../../assets/thumbnails',req.params.assetPath));
-});
-
-app.get('/assets/full/:assetPath', (req, res, next) => {
-    res.header(200);
-    res.sendFile(path.join(__dirname,'../../assets/full',req.params.assetPath));
-});
-
-app.get('/assets/icons/:assetPath', (req, res, next) => {
-    res.header(200);
-    res.sendFile(path.join(__dirname,'../../assets/icons',req.params.assetPath));
-});
-
-//UTIL ROUTES
-app.use('/utils', utilRouter);
-
-utilRouter.post('/',  imageController.pushImagesToServer);
-utilRouter.get('/', imageController.getAllImages);
-utilRouter.get('/image', imageController.findSpecificImages);
-
-utilRouter.post('/cart', cartController.updateCart);
-utilRouter.get('/cart', cartController.getCart);
-utilRouter.delete('/cart', cartController.deleteFromCart);
-utilRouter.put('/cart', cookieController.resetCookie, (req, res) => {
-    res.send({});
-});
-
-utilRouter.post('/payment', squareController.processPayment);
-utilRouter.get('/payment', squareController.confirmPayment, (req, res) => {
-    res.redirect ('/');
-});
-
-
-
-module.exports = app;

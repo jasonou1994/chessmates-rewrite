@@ -6,7 +6,6 @@ const entry = [
   './public/styles.css'
 ];
 
-
 module.exports = {
   devServer: {
     host: '0.0.0.0',
@@ -17,7 +16,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist/')
   },
-  //devtool: "eval-source-map",
+  devtool: "eval-source-map",
   module: {
     loaders: [
       {
