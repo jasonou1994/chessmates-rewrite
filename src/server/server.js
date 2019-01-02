@@ -1,8 +1,6 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-// const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('postgres://twssmlqn:jlPGPWeVGUUGFGvH2bZWl_cC45Y5yroo@pellefant.db.elephantsql.com:5432/twssmlqn');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +17,7 @@ const connectionRouter = express.Router();
 
 const playerController = require('./controllers/players/playerController');
 const connectionController = require('./controllers/connections/connectionController.js');
+const sqlController = require('./controllers/sql/sqlController.js');
 
 app.get('/', (req, res, next) => {
   res.header(200);
