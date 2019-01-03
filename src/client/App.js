@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Players from './components/Players.jsx';
 import SignIn from './components/SignIn.jsx';
+const connectionController = require('./controllers/connectionController');
 
 export default class App extends Component {
   constructor() {
@@ -9,6 +10,11 @@ export default class App extends Component {
       toggle: false,
       player: {}
     };
+  }
+
+  componentWillMount () {
+    connectionController.establishSSE();
+    console.log('hi');
   }
 
   render() {

@@ -26,11 +26,11 @@ app.get('/', (req, res, next) => {
 
 ////Player Routes//////
 app.use('/players', playerRouter);
-playerRouter.post('/', playerController.createPlayer)
+playerRouter.post('/', sqlController.addNewPlayer, sqlController.getAllPlayers,playerController.broadcastPlayers)
 
 //Connection Routes
 app.use('/connections', connectionRouter);
-connectionRouter.get('/', connectionController.establishSSE);
+connectionRouter.get('/', sqlController.getAllPlayers,  connectionController.establishSSE, playerController.broadcastPlayers);
 
 const server = app.listen(80, function () {
   console.log('Example app listening at http://%s:%s',

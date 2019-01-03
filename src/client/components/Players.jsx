@@ -8,7 +8,7 @@ class Players extends React.Component {
   }
 
   componentDidMount () {
-    connectionController.establishSSE();
+    
   }
 
   render () {

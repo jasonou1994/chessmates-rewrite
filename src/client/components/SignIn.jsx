@@ -6,7 +6,7 @@ class SignIn extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      user : "username",
+      user : "",
     }
   }
 
@@ -25,7 +25,8 @@ class SignIn extends React.Component {
     return (
       <div id='players'>
         Sign In
-        <input type='text' value={this.state.user} onChange={this.handlePlayerUpdate}></input>
+        <input type='text' value={this.state.user} placeholder='username'
+        onChange={this.handlePlayerUpdate}></input>
         <button onClick={this.submitPlayer}>Submit</button>
       </div>
     )

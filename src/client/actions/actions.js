@@ -1,6 +1,6 @@
 import * as types from './actionTypes'
 
-export const updateStateImages = (displayImages, tag) => ({
-  type: types.UPDATE_STATE_IMAGES,
-  payload : {displayImages, tag}
+export const updateLobbyPlayers = (lobbyPlayers) => ({
+  type: types.UPDATE_LOBBY_PLAYERS,
+  payload : lobbyPlayers,
 });

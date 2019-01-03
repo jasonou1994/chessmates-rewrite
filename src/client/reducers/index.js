@@ -12,11 +12,11 @@
 import { combineReducers } from 'redux';
 
 // import all reducers here
-import reducer from './reducer';
+import lobbyPlayers from './lobbyPlayers';
 
 // combine reducers
 const reducers = combineReducers({
-  state: reducer,
+  lobbyPlayers
 });
 
 // make the combined reducers available for import
