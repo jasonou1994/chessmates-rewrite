@@ -16,4 +16,8 @@ function establishSSE (req, res, next) {
   next();
 }
 
+function requestHeartbeat (req, res, next) {
+  
+}
+
 module.exports = connectionController;
