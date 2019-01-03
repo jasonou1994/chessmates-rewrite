@@ -14,7 +14,6 @@ export default class App extends Component {
 
   componentWillMount () {
     connectionController.establishSSE();
-    console.log('hi');
   }
 
   render() {

@@ -1,6 +1,10 @@
 import * as types from './actionTypes'
 
-export const updateLobbyPlayers = (lobbyPlayers) => ({
-  type: types.UPDATE_LOBBY_PLAYERS,
-  payload : lobbyPlayers,
-});
+const actions = {
+  updateLobbyPlayers : (lobbyPlayers) => ({
+    type: types.UPDATE_LOBBY_PLAYERS,
+    payload : lobbyPlayers,
+  }),
+}
+
+export default actions

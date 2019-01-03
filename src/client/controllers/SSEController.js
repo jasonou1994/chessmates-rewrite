@@ -1,3 +1,10 @@
+// import * as store from '../store';
+// import * as actions from '../actions/actions';
+const store = require('../store.js').default;
+const actions = require('../actions/actions').default;
+console.log(store);
+console.log(actions);
+
 let sseController = {};
 sseController.handleSSEResponse = handleSSEResponse;
 sseController.parseSSEFields = parseSSEFields;
@@ -25,6 +32,7 @@ function handleSSEResponse (response) {
         if (possibleEventArr && possibleEventArr[0]) {
           const receivedEventFields = sseController.parseSSEFields(possibleEventArr[0]);
           console.log(receivedEventFields);
+          store.dispatch(actions.updateLobbyPlayers(receivedEventFields.data));
 
           // splice possibleEventArr, recombine with \n\n to reconstruct original,
           // minus what was already parsed.

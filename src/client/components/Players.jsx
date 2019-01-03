@@ -1,20 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import * as actions from '../actions/actions';
+import LobbyPlayer from "./LobbyPlayer.jsx";
 const connectionController = require('../controllers/connectionController');
+
+const mapStateToProps = store => ({
+  players : store.lobbyPlayers.players,
+});
+
+const mapDispatchToProps = dispatch => ({
+  // setNewRequestBody : (requestBodyObj) => {
+  //   dispatch(actions.setNewRequestBody(requestBodyObj));
+  // },
+});
 
 class Players extends React.Component {
   constructor (props) {
     super (props);
   }
 
-  componentDidMount () {
-    
-  }
-
   render () {
+    // console.log(this.props)
+    const players = this.props.players.map((player, index) => {
+      return <LobbyPlayer key={index} name={player.name}></LobbyPlayer>
+    })
+    console.log(players);
     return (
       <div>
-        players
+        Players
+        {players}
       </div>
     )
   }
@@ -23,5 +38,7 @@ class Players extends React.Component {
 Players.propTypes = {
 };
 
-export default Players;
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Players);
