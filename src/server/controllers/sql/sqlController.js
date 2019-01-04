@@ -2,15 +2,18 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('postgres://jasonou@localhost:5432/chessmates');
 
 let sqlController = {};
+sqlController.lobbyPlayersCache = [];
 sqlController.getAllPlayers = getAllPlayers;
 sqlController._getAllPlayers = _getAllPlayers;
 sqlController.addNewPlayer = addNewPlayer;
 sqlController.logOutPlayer = logOutPlayer;
 
+
 function getAllPlayers (req, res, next) {
   // console.log('----- sqlController.getAllPlayers called. -----');
   sequelize.query("SELECT * FROM players where loggedin = TRUE", { type: sequelize.QueryTypes.SELECT})
   .then(players => {
+    this.lobbyPlayersCache = players;
     req.players = players;
     next();
   })
@@ -19,8 +22,6 @@ function getAllPlayers (req, res, next) {
 function _getAllPlayers (callback) {
   sequelize.query("SELECT * FROM players where loggedin = TRUE", { type: sequelize.QueryTypes.SELECT})
   .then(players => {
-    console.log(players);
-    console.log(callback);
     callback(players);
   })
 }
