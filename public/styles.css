@@ -1,3 +1,46 @@
 #players {
     border: 1px solid black;
-}
+} 
+
+h1 {
+    color: hotpink;
+  }
+  
+  body {
+    text-align: center;
+    margin: auto;
+  }
+  
+  #board {
+    display:flex;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+  }
+  
+  .square {
+    height: 50px;
+    width: 50px;
+  }
+  
+  .piece {
+    position: absolute;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width:50px;
+    cursor: pointer;
+  }
+  
+  .pendingMove {
+    height: 50px;
+    width: 50px;
+    background-color: hotpink;
+    opacity: .4;
+    position: absolute;
+    z-index: 100;
+  }
+  
