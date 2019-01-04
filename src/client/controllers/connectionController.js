@@ -6,6 +6,7 @@ connectionController.submitPlayer = submitPlayer;
 connectionController.establishSSE = establishSSE;
 
 function submitPlayer (player) {
+  console.log(store.getState().business.uuid)
   let postObj = {
     player,
     uuid : store.getState().business.uuid,
@@ -21,6 +22,7 @@ function submitPlayer (player) {
 };
 
 function establishSSE () {
+  console.log(store.getState().business.uuid)
   let postObj = {
     uuid : store.getState().business.uuid,
   };

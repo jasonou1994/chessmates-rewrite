@@ -13,7 +13,7 @@ function getAllPlayers (req, res, next) {
   // console.log('----- sqlController.getAllPlayers called. -----');
   sequelize.query("SELECT * FROM players where loggedin = TRUE", { type: sequelize.QueryTypes.SELECT})
   .then(players => {
-    this.lobbyPlayersCache = players;
+    sqlController.lobbyPlayersCache = players;
     req.players = players;
     next();
   })

@@ -31,7 +31,7 @@ app.get('/', (req, res, next) => {
 ////Player Routes//////
 app.use('/players', playerRouter);
 
-playerRouter.post('/', sqlController.addNewPlayer, playerController.addPlayerToConnection, sqlController.getAllPlayers,playerController.broadcastPlayers)
+playerRouter.post('/', playerController.uniquePlayerCheck, sqlController.addNewPlayer, playerController.addPlayerToConnection, sqlController.getAllPlayers,playerController.broadcastPlayers)
 
 //Connection Routes
 app.use('/connections', connectionRouter);

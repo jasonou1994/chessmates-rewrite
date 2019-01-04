@@ -25,23 +25,23 @@ function establishSSE (req, res, next) {
     //remove player from database, if exists
     //1. determine if the player is logged in to a player at all
     let player = connectionController.connections.find(conn => conn.id === req.body.uuid).player;
-    //2. if so, update that player in db 
+    //2. if so, update that player in db, and refresh all existing conns
     if (player) {
       sqlController.logOutPlayer(player);
+
+      //refresh all existing conns with most updated db again
+      sqlController._getAllPlayers((players) => {
+        connectionController.connections.forEach(conn => {
+          conn.sse.write('event: lobbyPlayers\n');
+          conn.sse.write('id: ' + conn.eventId + '\n');
+          conn.sse.write('data :' + JSON.stringify(players)+'\n\n');
+          conn.eventId++;
+        });
+      });
     }
 
     //remove connection object
     connectionController.connections = connectionController.connections.filter(conn => conn.player !== player);
-
-    //refresh all existing conns with most updated db again
-    sqlController._getAllPlayers((players) => {
-      connectionController.connections.forEach(conn => {
-        conn.sse.write('event: lobbyPlayers\n');
-        conn.sse.write('id: ' + conn.eventId + '\n');
-        conn.sse.write('data :' + JSON.stringify(players)+'\n\n');
-        conn.eventId++;
-      });
-    });
   })
 
   next();
