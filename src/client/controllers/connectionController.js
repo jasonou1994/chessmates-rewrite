@@ -1,3 +1,4 @@
+const store = require('../store.js').default;
 const sseController = require('./SSEController.js');
 
 let connectionController = {};
@@ -7,6 +8,7 @@ connectionController.establishSSE = establishSSE;
 function submitPlayer (player) {
   let postObj = {
     player,
+    uuid : store.getState().business.uuid,
   };
 
   fetch('http://localhost:80/players', {
@@ -18,9 +20,9 @@ function submitPlayer (player) {
   })
 };
 
-function establishSSE (uuid) {
+function establishSSE () {
   let postObj = {
-    uuid,
+    uuid : store.getState().business.uuid,
   };
 
   fetch('http://localhost:80/connections', {

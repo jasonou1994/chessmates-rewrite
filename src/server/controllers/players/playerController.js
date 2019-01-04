@@ -6,7 +6,7 @@ playerController.broadcastPlayers = broadcastPlayers;
 playerController.addPlayerToConnection = addPlayerToConnection;
 
 function addPlayerToConnection (req, res, next) {
-
+  let foundConn = connectionController.connections.find(conn => conn.id === req.body.uuid)
 }
 
 function broadcastPlayers (req, res, next) {

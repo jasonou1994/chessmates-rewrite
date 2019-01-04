@@ -1,7 +1,9 @@
 import * as types from '../actions/actionTypes';
+const uuidv4 = require('uuid/v4');
 
 const initialState = {
   players : [],
+  uuid : uuidv4(),
 };
 
 const reducer = (state=initialState, action) => {

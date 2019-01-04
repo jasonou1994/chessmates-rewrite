@@ -1,5 +1,3 @@
-const uuidv4 = require('uuid/v4');
-
 const playerController = require('../players/playerController.js');
 
 let connectionController = {};
@@ -14,11 +12,8 @@ function establishSSE (req, res, next) {
   res.header('Content-Type', 'text/event-stream');
   res.header('Connection', 'keep-alive');
 
-  const uuid = uuidv4();
-  req.id = uuid;
-
   connectionController.connections.push({
-    id : uuid,
+    id : req.body.uuid,
     eventId : 1,
     name : null,
     sse : res,
@@ -28,7 +23,7 @@ function establishSSE (req, res, next) {
 
   req.on('close', () => {
     console.log('hi');
-    //remove player from database
+    //remove player from database, if exists
   })
 
   next();

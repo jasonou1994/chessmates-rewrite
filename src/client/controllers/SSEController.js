@@ -2,8 +2,6 @@
 // import * as actions from '../actions/actions';
 const store = require('../store.js').default;
 const actions = require('../actions/actions').default;
-console.log(store);
-console.log(actions);
 
 let sseController = {};
 sseController.handleSSEResponse = handleSSEResponse;

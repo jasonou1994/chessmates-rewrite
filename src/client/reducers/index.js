@@ -12,11 +12,11 @@
 import { combineReducers } from 'redux';
 
 // import all reducers here
-import lobbyPlayers from './lobbyPlayers';
+import business from './business';
 
 // combine reducers
 const reducers = combineReducers({
-  lobbyPlayers
+  business
 });
 
 // make the combined reducers available for import

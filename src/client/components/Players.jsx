@@ -6,7 +6,7 @@ import LobbyPlayer from "./LobbyPlayer.jsx";
 const connectionController = require('../controllers/connectionController');
 
 const mapStateToProps = store => ({
-  players : store.lobbyPlayers.players,
+  players : store.business.players,
 });
 
 const mapDispatchToProps = dispatch => ({
