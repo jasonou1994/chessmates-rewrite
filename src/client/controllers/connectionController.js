@@ -18,8 +18,18 @@ function submitPlayer (player) {
   })
 };
 
-function establishSSE () {
-  fetch('http://localhost:80/connections').then(response => {
+function establishSSE (uuid) {
+  let postObj = {
+    uuid,
+  };
+
+  fetch('http://localhost:80/connections', {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json',
+    },
+    body: JSON.stringify(postObj),
+  }).then(response => {
     sseController.handleSSEResponse(response);
   });
 }

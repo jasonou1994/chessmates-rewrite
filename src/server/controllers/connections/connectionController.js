@@ -9,23 +9,29 @@ connectionController.setCookie = setCookie;
 
 function establishSSE (req, res, next) {
   console.log('----- connectionController.establishSSE called. -----');
-  res.currentId = 1;
+
+  res.header(200);
+  res.header('Content-Type', 'text/event-stream');
+  res.header('Connection', 'keep-alive');
+
+  const uuid = uuidv4();
+  req.id = uuid;
+
   connectionController.connections.push({
-    id : req.cookies['chessmates'],
+    id : uuid,
+    eventId : 1,
     name : null,
     sse : res,
   });
 
-  res.header(200);
-  res.header('Content-Type', 'text/event-stream');
-  // res.header('Cache-Control', 'no-cache');
-  res.header('Connection', 'keep-alive');
+  console.log(connectionController.connections);
+
+  req.on('close', () => {
+    console.log('hi');
+    //remove player from database
+  })
 
   next();
-}
-
-function requestHeartbeat (req, res, next) {
-  
 }
 
 function setCookie (req, res, next) {
@@ -33,8 +39,8 @@ function setCookie (req, res, next) {
   if(!req.cookies['chessmates']){
     const uuid = uuidv4();
     res.cookie('chessmates', uuid, {expire : new Date() + 9999});
-    next();
   }
+  next();
 }
 
 module.exports = connectionController;
