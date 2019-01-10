@@ -21,6 +21,9 @@ function establishSSE (req, res, next) {
     request : req,
   });
 
+  // console.log(connectionController.connections);
+  connectionController.connections.forEach(conn => console.log(conn.id));
+
   req.on('close', () => {
     //remove player from database, if exists
     //1. determine if the player is logged in to a player at all
@@ -48,7 +51,7 @@ function establishSSE (req, res, next) {
 }
 
 function setCookie (req, res, next) {
-  console.log('----- connectionController.setCookie called. -----');
+  // console.log('----- connectionController.setCookie called. -----');
   if(!req.cookies['chessmates']){
     const uuid = uuidv4();
     res.cookie('chessmates', uuid, {expire : new Date() + 9999});
