@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Players from './components/Players.jsx';
 import SignIn from './components/SignIn.jsx';
+import Board from './components/Board';
 const connectionController = require('./controllers/connectionController');
 
 export default class App extends Component {
@@ -19,6 +20,7 @@ export default class App extends Component {
       <div>
         <SignIn></SignIn>
         <Players></Players>
+        <Board />
       </div>
     );
   }
