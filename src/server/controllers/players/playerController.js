@@ -7,6 +7,7 @@ playerController.addPlayerToConnection = addPlayerToConnection;
 playerController.uniquePlayerCheck = uniquePlayerCheck;
 
 function addPlayerToConnection (req, res, next) {
+  console.log(connectionController.connections);
   let foundConn = connectionController.connections.find(conn => conn.id === req.body.uuid);
 
   foundConn.player = req.body.player;
