@@ -28,6 +28,8 @@ function establishSSE (req, res, next) {
     //remove player from database, if exists
     //1. determine if the player is logged in to a player at all
     let player = connectionController.connections.find(conn => conn.id === req.body.uuid).player;
+
+
     //2. if so, update that player in db, and refresh all existing conns
     if (player) {
       sqlController.logOutPlayer(player);
@@ -44,7 +46,7 @@ function establishSSE (req, res, next) {
     }
 
     //remove connection object
-    connectionController.connections = connectionController.connections.filter(conn => conn.player !== player);
+    connectionController.connections = connectionController.connections.filter(conn => conn.id !== req.body.uuid);
   })
 
   next();

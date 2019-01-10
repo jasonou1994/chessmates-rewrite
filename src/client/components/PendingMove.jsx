@@ -1,5 +1,5 @@
 import React from 'react'; 
-import Square from './Square';
+import Square from './Square.jsx';
 
 
 class PendingMove extends React.Component {

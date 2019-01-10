@@ -1,13 +1,13 @@
 import React from 'react'; 
-import Square from './Square';
-import Piece from './Piece';
+import Square from './Square.jsx';
+import Piece from './Piece.jsx';
 import Rook from '../controllers/pieces/rook';
 import King from '../controllers/pieces/king';
 import Bishop from '../controllers/pieces/bishop';
 import Knight from '../controllers/pieces/knight';
 import Queen from '../controllers/pieces/queen';
 import Pawn from '../controllers/pieces/pawn';
-import PendingMove from './PendingMove';
+import PendingMove from './PendingMove.jsx';
 
 class Board extends React.Component {
     constructor() {

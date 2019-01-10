@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Players from './components/Players.jsx';
 import SignIn from './components/SignIn.jsx';
-import Board from './components/Board';
+import Board from './components/Board.jsx';
 const connectionController = require('./controllers/connectionController');
 
 export default class App extends Component {
