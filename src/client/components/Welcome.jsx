@@ -26,7 +26,7 @@ class Welcome extends React.Component {
     console.log(player);
     return (
       <div id='welcome'>
-        Welcome
+        Welcome&nbsp
         <span>
           {player}
         </span>
