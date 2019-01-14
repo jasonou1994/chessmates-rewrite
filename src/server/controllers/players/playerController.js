@@ -30,11 +30,18 @@ function uniquePlayerCheck (req, res, next) {
 }
 
 function broadcastPlayers (req, res, next) {
-  // console.log('BROADCAST');
   connectionController.connections.forEach(conn => {
+    playersArrCopy = JSON.parse(JSON.stringify(req.players));
+    
+    let player = playersArrCopy.find(player => player.name === conn.player);
+    if (player) {
+      player.player = true;
+    }
+    // console.log(playersArrCopy);
+    
     conn.sse.write('event: lobbyPlayers\n');
     conn.sse.write('id: ' + conn.eventId + '\n');
-    conn.sse.write('data :' + JSON.stringify(req.players)+'\n\n');
+    conn.sse.write('data :' + JSON.stringify(playersArrCopy)+'\n\n');
     conn.eventId++;
   });
 }

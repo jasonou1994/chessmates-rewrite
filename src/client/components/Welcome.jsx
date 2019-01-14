@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as actions from '../actions/actions';
-import LobbyPlayer from "./LobbyPlayer.jsx";
-const connectionController = require('../controllers/connectionController');
 
 const mapStateToProps = store => ({
   players : store.business.players,
@@ -15,30 +13,32 @@ const mapDispatchToProps = dispatch => ({
   // },
 });
 
-class Players extends React.Component {
+class Welcome extends React.Component {
   constructor (props) {
     super (props);
   }
 
   render () {
-    // console.log(this.props)
-    const players = this.props.players.map((player, index) => {
-      return <LobbyPlayer key={index} name={player.name}></LobbyPlayer>
+    let player = this.props.players.filter(player => player.player === true).map((player, index) => {
+      return <span>{player.name}</span>
     })
-    console.log(players);
+
+    console.log(player);
     return (
-      <div>
-        Players
-        {players}
+      <div id='welcome'>
+        Welcome
+        <span>
+          {player}
+        </span>
       </div>
     )
   }
 }
 
-Players.propTypes = {
+Welcome.propTypes = {
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Players);
+)(Welcome);

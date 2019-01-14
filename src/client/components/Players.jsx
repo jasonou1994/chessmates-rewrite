@@ -22,10 +22,11 @@ class Players extends React.Component {
 
   render () {
     // console.log(this.props)
-    const players = this.props.players.map((player, index) => {
+    const players = this.props.players.filter(player => player.player !== true)
+    .map((player, index) => {
       return <LobbyPlayer key={index} name={player.name}></LobbyPlayer>
     })
-    console.log(players);
+    // console.log(players);
     return (
       <div>
         Players

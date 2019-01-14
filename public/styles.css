@@ -1,6 +1,10 @@
 #players {
-    border: 1px solid black;
+  border: 1px solid black;
 } 
+
+#welcome {
+  border: 1px solid black;
+}
 
 h1 {
     color: hotpink;
