@@ -26,7 +26,7 @@ class Players extends React.Component {
     .map((player, index) => {
       return <LobbyPlayer key={index} name={player.name}></LobbyPlayer>
     })
-    // console.log(players);
+    console.log(players);
     return (
       <div>
         Players
